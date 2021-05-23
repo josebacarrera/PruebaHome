@@ -31,4 +31,20 @@ public class CategoriaModelo {
 	}
 	
 	
+	//seleccionar id
+		public Categoria categoriaId(int id_categoria) {
+			String sql="Select * from categoria where id_categoria="+id_categoria;
+			SqlRowSet rs=db.queryForRowSet(sql);
+			
+			Categoria c = null;
+			if(rs.next()){
+				return new Categoria( 
+						rs.getInt("id_categoria"),
+						rs.getString("nombre"),
+						rs.getInt("id_seccion")
+				);
+			}
+			   return null;
+
+		}
 }

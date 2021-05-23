@@ -29,5 +29,5 @@ public class SeccionModelo {
 		}
 		return s;
 	}
-	
+
 }

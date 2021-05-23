@@ -1,15 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"> <!-- IMPORTANTE -->
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"> <!-- IMPORTANTE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SEX SHOP</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/estilo.css">
-    <link rel="shortcut icon" href="images/logoB.png">
-    <link rel="stylesheet" href="js/bootstrap.min.js">
 </head>
 <body>
 <!-- Navbar -->
@@ -19,6 +16,7 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    <button class="btn btn-outline-success login" id="">Search</button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
@@ -27,20 +25,64 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Link</a>
         </li>
+<!-- LOGIN -->
+<button type="button" class="btn btn-dark close mx-2 login" data-bs-dismiss="modal">Login</button>
+   <div id="log" class="modal " tabindex="-1">
+   <form action="/" method="POST">
+  <div  class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">User Name</label>
+    <input name="username" type="text" class="form-control" id="user" aria-describedby="emailHelp">
+  </div>
+
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Password</label>
+    <input name="password" type="password" class="form-control" id="pass" aria-describedby="emailHelp">
+  </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>
+<!-- LOGIN -->
+<!-- filtrar -->
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
+             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Categoria
+              </a>
+             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+             <th:block th:each="c : ${categoria}">
+                <li><a th:id="${c.id_categoria}" th:text="${c.nombre}" class="dropdown-item filtraar" href="#">Action</a></li>
+             </th:block>
+
+             </ul>
+       </li>
+       <!-- filtrar -->
+       <!-- ordenar -->
+       <li class="nav-item dropdown">
+             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Categoria
+              </a>
+             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        
+                <li><a class="dropdown-item ordenar" value="nombre">Nombre</a></li>     
+                <li><a class="dropdown-item ordenar" value="precio">Precio</a></li>   
+
+
+             </ul>
+       </li>
+       <!-- ordenar -->
       </ul>
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -53,21 +95,106 @@
 
 <br>
 
-
+<center><button id=""  class="btn btn-primary anadir" >Añadir producto</button></center>
 <div class="container mx-auto">
-  <div class="row">
+  <div class="row" id="padre">
   <!-- EN LA LINEA DEL TH:EACH TIENE QUE VER UN TH:ID -->
-      	<div th:each="p:${producto}" th:id="${p.id_producto}" class="col-3 border p-2">
-        	<h1 th:text="${p.nombre}">Titulo</h1>
-        	<p th:text="${p.descripcion}">Contenido</p>
-        	<p th:text="${p.precio}"></p>
-        	<button id=""  class="btn btn-primary comprar">Comprar</button>
+      	<th:block th:each="p:${producto}">
+      	<div th:id="${p.id_producto}" class="col-3 border p-2 producto" >
+        	<h1 th:text="${p.nombre}" class="nombre">Titulo</h1>
+        	<p th:text="${p.descripcion}" class="descripcion">Contenido</p>
+        	<p th:text="${p.precio} + '€'" class="precio"></p>
         	<!-- EDITAR -->
-        	<button id=""  class="btn btn-primary editar">Editar</button>
+        	<button th:if="${esAdmin == true}" id=""  class="btn btn-primary editar">Editar</button>
         	<!-- BORRAR -->
-        	<button id=""  class="btn btn-primary borrar">Borrar</button>
+        	<button th:if="${esAdmin == true}" id=""  class="btn btn-primary borrar">Borrar</button>
        </div>
+       </th:block>
   </div>
  </div>
+
+<!-- Modal editar y eliminar -->
+<div class="modal" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Nombre</label>
+    <input type="email" value="" class="form-control" id="nombre" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text"></div>
+  </div>
+<div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Descripcion</label>
+    <input type="email" class="form-control" id="descripcion" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text"></div>
+  </div>
+<div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Precio</label>
+    <input type="email" class="form-control" id="precio" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text"></div>
+  </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary save">Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- Modal añadir -->
+ <div class="modal" id="anadir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Nombre</label>
+    <input type="email" value="" class="form-control" id="nom" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text"></div>
+  </div>
+<div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Descripcion</label>
+    <input type="email" class="form-control" id="des" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text"></div>
+  </div>
+<div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Precio</label>
+    <input type="email" class="form-control" id="pre" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text"></div>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Stock</label>
+    <input type="email" class="form-control" id="stock" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text"></div>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Imagen</label>
+    <input type="email" class="form-control" id="img" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text"></div>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Categoria</label>
+    <input type="email" class="form-control" id="id_categoria" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text"></div>
+  </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary saveAnadir">Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+ 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+<script src="js/jquery-3.6.0.js"></script>
+<script src="js/ajax.js"></script> <!-- IMPORTANTE -->
 </html>

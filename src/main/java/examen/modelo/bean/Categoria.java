@@ -10,22 +10,24 @@ public class Categoria {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 	public Categoria(int id_categoria, String nombre, int id_seccion) {
 		super();
 		this.id_categoria = id_categoria;
 		this.nombre = nombre;
 		this.id_seccion = id_seccion;
 	}
+	
 	public int getId_categoria() {
 		return id_categoria;
 	}
 	public void setId_categoria(int id_categoria) {
 		this.id_categoria = id_categoria;
 	}
-	public String getNombreString() {
+	public String getNombre() {
 		return nombre;
 	}
-	public void setNombreString(String nombreString) {
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 	public int getId_seccion() {
@@ -34,6 +36,8 @@ public class Categoria {
 	public void setId_seccion(int id_seccion) {
 		this.id_seccion = id_seccion;
 	}
+	
+	
 	
 	
 	
