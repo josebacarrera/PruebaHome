@@ -6,7 +6,6 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 import examen.modelo.bean.Producto;
 
-
 @Component
 public class ProductoModelo {
 	
@@ -119,7 +118,7 @@ public class ProductoModelo {
 	
 	public ArrayList<Producto> ordenar(String ordenar) {
 		ArrayList<Producto> p = new ArrayList<Producto>();
-		String sql="Select * from producto where deleted=0 order by ?";
+		String sql = "Select * from producto where deleted=0 order by ? ";/* desc o asc */
 		SqlRowSet rs=db.queryForRowSet(sql,ordenar);
 		
 		while(rs.next()){p.add(new Producto(
