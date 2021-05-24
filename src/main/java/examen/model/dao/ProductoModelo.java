@@ -12,14 +12,6 @@ public class ProductoModelo {
 	@Autowired
 	JdbcTemplate db;
 	
-	/*
-	*
-	*INSERT,DELETE Y UPDATE -->return db.update(sql); #Devuelve el numero de celdas modificadas INT
-	*
-	*SELECT --> SqlRowSet rs=db.queryForRowSet(sql); STRING
-	*
-	**/
-	
 	//Mostrar todo
 	public ArrayList<Producto> selectAll(){
 		ArrayList<Producto> p = new ArrayList<Producto>();
@@ -93,7 +85,7 @@ public class ProductoModelo {
 		   return rs.getInt("ultima_id");
 
 	}
-	
+	//filtrar
 	public ArrayList<Producto> filtrar(int id_categoria) {
 		ArrayList<Producto> p = new ArrayList<Producto>();
 		String sql="Select * from producto where deleted=0 and id_categoria="+id_categoria;
@@ -115,7 +107,7 @@ public class ProductoModelo {
 
 	} 
 	
-	
+	//ordenar 
 	public ArrayList<Producto> ordenar(String ordenar) {
 		ArrayList<Producto> p = new ArrayList<Producto>();
 		String sql = "Select * from producto where deleted=0 order by ? ";/* desc o asc */

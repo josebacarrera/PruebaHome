@@ -36,7 +36,6 @@ public class MainControllers {
 					 
 				 }
 			 } 
-			 
 		
 				Modelo.addAttribute("producto", pm.selectAll());
 				Modelo.addAttribute("seccion", sm.selectAll());

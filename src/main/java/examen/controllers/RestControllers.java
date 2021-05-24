@@ -21,19 +21,7 @@ import examen.modelo.bean.Login;
 @RequestMapping("/api")
 public class RestControllers {
 
-
-	/* 
-	 * aplication
-	 * 
-	 * 
-	 *
-	 * @GetMapping --> Recibir o select
-	 * @PostMapping --> Añadir
-	 * @PutMapping --> Editar o Modificar
-	 * @DeleteMapping --> Borrar
-	 * */
-	
-	
+	 
 	@Autowired
 	SeccionModelo sm;
 	
@@ -58,12 +46,13 @@ public class RestControllers {
 		
 		return m;
 	
-	}
+	} 
 	
 	/*
 	 * 	Producto a producto http://localhost:8080/api/producto/1 o 2 o 3 o 4 ...
 	 * */
 	
+	//idcards
 	@GetMapping("/producto/{id_categoria}")
 	public Map<String,Object> producto(@PathVariable int id_categoria){
 		Map<String,Object> m = new HashMap<String,Object>();
@@ -75,7 +64,7 @@ public class RestControllers {
 	
 	}
 	
-	
+	//borrar 
 	@DeleteMapping("/producto/{id_categoria}")
 	public Map<String,Object> deleteProducto(@PathVariable int id_categoria){
 		Map<String,Object> m = new HashMap<String,Object>();
@@ -86,7 +75,7 @@ public class RestControllers {
 		return m;
 	}	
 	
-	
+	//editar 
 	@PutMapping("/producto/{id_categoria}")
 	public Map<String,Object> editarProducto(@PathVariable int id_categoria,String nombre,String descripcion,double precio){
 		Map<String,Object> m = new HashMap<String,Object>();
@@ -97,6 +86,7 @@ public class RestControllers {
 		return m;
 	}
 	
+	//añadir
 	@PostMapping("/producto")
 	public Map<String,Object> anadirProducto(String nombre, String descripcion,double precio,int stock,String img,int id_categoria){
 		Map<String,Object> m = new HashMap<String,Object>();
@@ -106,19 +96,9 @@ public class RestControllers {
 		m.put("nuevoproducto", pm.ultimaId());
 		
 		return m;
-	}
+	} 
 
-	
-	/*
-	 * @PutMapping("/login") public Map<String,Object> login(@RequestParam
-	 * Map<String, String> param){ Map<String,Object> m = new
-	 * HashMap<String,Object>(); m.put("peticion", "recibida"); if(lm.loggear(new
-	 * Login(param.get("username"), param.get("password"))) == 1) { m.put("status",
-	 * 1); } else { m.put("status", 0); }
-	 * 
-	 * return m; }
-	 */
-	
+	//filtrar
 	@GetMapping("/producto/filtrar/{id_categoria}")
 	public Map<String,Object> categoria(@PathVariable int id_categoria){
 		Map<String,Object> m = new HashMap<String,Object>();
